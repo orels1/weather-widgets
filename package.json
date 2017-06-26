@@ -1,0 +1,29 @@
+{
+  "name": "test-weather",
+  "version": "1.0.0",
+  "description": "a test task for a job application",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nodejs",
+    "react",
+    "vanilla"
+  ],
+  "author": "orels1",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "lodash": "^4.17.4",
+    "node-fetch": "^1.7.1",
+    "redis": "^2.7.1"
+  },
+  "devDependencies": {
+    "chai": "^4.0.2",
+    "chai-as-promised": "^7.0.0",
+    "mocha": "^3.4.2"
+  }
+}
