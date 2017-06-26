@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const pug = require('pug');
 
 const app = express();
 
@@ -11,11 +12,7 @@ app.use('/static', express.static(path.join(__dirname, 'static')));
 app.use('/api/weather', require('./api/weather').router);
 
 app.get('/', (req, res) => {
-  res.status(200).send({
-  status: 'OK',
-  results: 'api is alive',
-});
-
+  res.status(200).send(pug.renderFile(path.join(__dirname, 'app/views', 'index.pug')));
 });
 
 app.listen(3000, () => {
