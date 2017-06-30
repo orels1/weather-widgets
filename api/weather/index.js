@@ -58,7 +58,7 @@ exports.filterWeatherData = filterWeatherData;
 // TODO: think o refactoring the redis saving/loading
 router.get('/forecast/:city', catchAsync( async (req, res) => {
   // check if we have cached version
-  let forecast = await client.getAsync(`forecast/moscow/${req.query.days || 1}`);
+  let forecast = await client.getAsync(`forecast/${req.params.city}/${req.query.days || 1}`);
   if(!forecast) {
     // if not - get fresh data
     const json = await getApixu('forecast', {
@@ -72,7 +72,7 @@ router.get('/forecast/:city', catchAsync( async (req, res) => {
     // filter the data we need
     data = filterWeatherData(json.forecast.forecastday);
     // save data to redis
-    await client.setAsync(`forecast/moscow/${req.query.days || 1}`,
+    await client.setAsync(`forecast/${req.params.city}/${req.query.days || 1}`,
       JSON.stringify({ forecast: data }),
       'EX',
       3600);
