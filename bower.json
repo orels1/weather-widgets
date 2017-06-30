@@ -1,0 +1,27 @@
+{
+  "name": "test-weather",
+  "description": "a test task for a job application",
+  "main": "server.js",
+  "authors": [
+    "orels1"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "nodejs",
+    "react",
+    "vanilla"
+  ],
+  "homepage": "https://github.com/orels1/weather-widgets",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "v4.0.0-alpha.6",
+    "react-select": "^0.9.1"
+  }
+}

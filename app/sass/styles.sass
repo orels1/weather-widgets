@@ -1,11 +1,18 @@
 @import '../../bower_components/bootstrap/scss/bootstrap'
+@import '../../bower_components/react-select/scss/default'
 @import url('https://fonts.googleapis.com/css?family=Fira+Sans:300,400,700,900&subset=cyrillic')
+
+$gray: #f4f6f9
 
 *
   font-family: 'Fira Sans', sans-serif
 
 html, body, #app, .wrapper
   min-height: 100vh
+
+
+.main
+  background: $gray
 
 .padding-30
   padding: 30px
@@ -19,8 +26,12 @@ html, body, #app, .wrapper
 
 .header
   margin-bottom: 30px
-.display-4
-  font-weight: 700
+
+  a
+    text-decoration: none
+
+  .display-4
+    font-weight: 700
 
 .add-widget-btn
   color: #e74c3c
@@ -55,22 +66,135 @@ html, body, #app, .wrapper
 
 .widgets-list
 
-  .card
-    margin: 0 15px 15px 15px
-    max-width: 200px
-    border: none
-    border-radius: 4px
-    box-shadow: 0 10px 14px rgba(0,0,0,.1)
-    position: relative
-    top: 0
-    transition: all 150ms ease
+.card
+  margin: 0 15px 15px 15px
+  max-width: 200px
+  border: none
+  border-radius: 4px
+  box-shadow: 0 10px 14px rgba(0,0,0,.05)
+  position: relative
+  top: 0
+  transition: all 150ms ease
+
+  &.interactive
 
     &:hover
       top: -10px
-      box-shadow: 0 20px 36px rgba(0,0,0,.1)
+      box-shadow: 0 20px 36px rgba(0,0,0,.05)
+
+  .list-group
+
+    .list-group-item
+      border: none
+      padding: 5px 0
+
+.Select-value
+  color: black
+
+.widget-constructor-card
+  max-width: 100%
+
+  .form-group
+    flex: 1
+    display: flex
+    font-family: 'Fira Sans', sans-serif
+
+    input::placeholder
+      color: rgba(black, .2)
+
+    label
+      align-self: center
+      margin-bottom: 0
+
+  .Select
+    min-width: 110px
+
+.title-control
+  border: none
+  padding: 0
+  margin: 0
+  font-size: 26px
+  font-weight: 700
+  color: black
+  font-family: 'Fira Sans', sans-serif
+
+.btn
+  outline: none !important
+
+.btn-control
+  box-shadow: 0 4px 14px rgba(#0275d8, .3)
+  cursor: pointer
+
+  &:focus
+    box-shadow: 0 4px 14px rgba(#0275d8, .3)
+
+
+.widget
+
+  .card
+    box-shadow: none
+
+    .card-block
+      padding: 0
+
+  .list-group
+    font-size: 12px
+
+    .list-group-item
+      padding: 0
+
+      &.temp-night
+        font-size: 11px
+        color: rgba(black, .6)
+
+  .widget-date
+    text-align: center
+    font-size: 12px
+    color: rgba(black,.8)
+    margin-top: 10px
+
+  &.card
+    max-width: initial
+    float: left
+
+    .card-block
+      padding-bottom: 0
+
+    .card-title
+      line-height: 22px
+
+  &.widget-vertical
+
+    .card
+      flex-direction: row !important
+      align-items: center
+
+      .weather-condition
+        width: 40px
+        height: 40px
+
+    .card-block
+      display: flex
+      flex-direction: column
+      justify-content: center
+      margin-left: 10px
+
+    .widget-date
+      margin-top: 2px
 
     .list-group
+      flex-direction: row !important
+      align-items: flex-end !important
 
-      .list-group-item
-        border: none
-        padding: 5px 0
+      .temp-night
+        line-height: 14px
+        margin-left: 7px
+
+    .forecast-container
+      flex-direction: column !important
+
+
+.weather-condition
+  height: 64px
+  width: 64px
+  align-self: center
