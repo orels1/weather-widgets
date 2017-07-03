@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import Select from 'react-select';
+import PropTypes from 'prop-types';
 import Header from '../Header';
 import Widget from '../Widget';
 
@@ -11,7 +12,6 @@ class WidgetConstructor extends React.Component {
     super(props);
 
     this.state = {
-      title: '',
       days: { label: 1, value: 1 },
       daysOptions: [
         { label: '1', value: 1 },
@@ -28,43 +28,44 @@ class WidgetConstructor extends React.Component {
       typeOptions: [
         { label: 'Horizontal', value: 'horizontal' },
         { label: 'Vertical', value: 'vertical' },
-      ]
+      ],
+      embedLink: 'http://weather.orels1.tips/embed/Moscow?days=1&type=horizontal',
+      embedCode: '',
     }
   }
 
-  handleChange(event) {
-    if (Object.keys(this.state).includes(event.target.name)) {
-      let change = {};
-      change[event.target.name] = event.target.value || '';
-      this.setState(Object.assign({}, this.state, change));
-    }
+  componentDidMount() {
+    const code = this.constructEmbedCode(this.state.embedLink, this.state.type.value, this.state.days.value);
+    this.setState(Object.assign({}, this.state, { embedCode: code }));
+  }
+
+  constructEmbedCode(link, type, days) {
+    return `<div style="height:0; overflow:hidden; padding-bottom: ${((type === 'horizontal' || days === 1) && '17%') || type === 'vertical' && (days === 3 && '24%' || '37%')}; width:100%;">
+  <iframe src="${link}" frameborder="0" style="position: absolute; top: 0; height: 100%; width: 100%; overflow: hidden;" />
+</div>`
   }
 
   handleSelectChange(name, val) {
     if (Object.keys(this.state).includes(name)) {
       let change = {};
       change[name] = val;
-      this.setState(Object.assign({}, this.state, change));
+      const newState = Object.assign({}, this.state, change);
+      const link = `http://wather.orels1.tips/embed/${newState.city.value}?days=${newState.days.value}&type=${newState.type.value}`;
+      const code = this.constructEmbedCode(link, newState.type.value, newState.days.value);
+      Object.assign(newState, { embedCode: code, embedLink: link });
+      this.setState(newState);
     }
   }
 
   render() {
     return (
       <div className="widget-constructor">
-        <Header title="Create new widget" />
+        {this.props.header &&
+          <Header title="Create new widget" />
+        }
         <div className="row">
-          <div className="col-6">
+          <div className="col-5">
             <div className="card widget-constructor-card card-block d-flex flex-wrap flex-column justify-content-between">
-              <div className="form-group">
-                <input
-                  className="form-control title-control"
-                  type="text"
-                  name="title"
-                  placeholder="Click to edit title"
-                  value={this.state.title}
-                  onChange={this.handleChange.bind(this)}
-                />
-              </div>
               <div className="form-group row">
                 <label className="col">Forecast days</label>
                 <Select
@@ -98,19 +99,20 @@ class WidgetConstructor extends React.Component {
                   className="col"
                 />
               </div>
-              <button className="btn btn-primary btn-control">
-                Create widget
-              </button>
+              <h6>Copy and paste this code onto your website</h6>
+              <pre>
+                {this.state.embedCode}
+              </pre>
             </div>
           </div>
           <div className="col">
             <div className="w-100">
               <Widget
-                title={this.state.title}
                 city={this.state.city.value}
                 days={this.state.days.value}
                 type={this.state.type.value}
               />
+              <div style={{clear: 'both'}} />
             </div>
           </div>
         </div>
@@ -119,5 +121,13 @@ class WidgetConstructor extends React.Component {
     )
   }
 }
+
+WidgetConstructor.propTypes = {
+  header: PropTypes.bool,
+};
+
+WidgetConstructor.defaultProps = {
+  header: true,
+};
 
 export default WidgetConstructor;

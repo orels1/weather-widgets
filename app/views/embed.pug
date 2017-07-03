@@ -1,0 +1,22 @@
+//
+   Created by orel- on 30/Jun/17.
+
+doctype html
+html
+    head
+        title #{city} weather forecast
+        link(rel="stylesheet" href="/static/embed.css")
+    body
+        div(class=widgetClasses)
+            h4.widget__title=city
+            .widget__forecast
+                each day in forecast
+                    .forecast-day
+                        img.forecast-day__image(src=day.day.condition.icon title=day.day.condition.text)
+                        .forecast-info
+                            ul.forecast-info__tempts
+                                li.forecast-info__item
+                                    b=day.tempts.day.temp_c + ' C'
+                                li.forecast-info__item.forecast-info__item_night
+                                    b=day.tempts.night.temp_c + ' C'
+                            .forecast-info__dates=day.date

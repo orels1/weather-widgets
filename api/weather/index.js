@@ -55,16 +55,15 @@ const filterWeatherData = forecast => (
 
 exports.filterWeatherData = filterWeatherData;
 
-// TODO: think o refactoring the redis saving/loading
-router.get('/forecast/:city', catchAsync( async (req, res) => {
-  // check if we have cached version
-  let forecast = await client.getAsync(`forecast/${req.params.city}/${req.query.days || 1}`);
+// Probable should extract saving/loading to it's own function
+const getForecast = async (city, days = 1) => {
+  let forecast = await client.getAsync(`forecast/${city}/${days}`);
   if(!forecast) {
     // if not - get fresh data
     const json = await getApixu('forecast', {
-      q: req.params.city,
+      q: city,
       lang: LANG,
-      days: req.query.days || 1,
+      days: days,
     });
     if (!json.forecast || json.forecast.forecastday.length === 0) {
       throw new Error('NoForecastReceived');
@@ -72,7 +71,7 @@ router.get('/forecast/:city', catchAsync( async (req, res) => {
     // filter the data we need
     data = filterWeatherData(json.forecast.forecastday);
     // save data to redis
-    await client.setAsync(`forecast/${req.params.city}/${req.query.days || 1}`,
+    await client.setAsync(`forecast/${city}/${days}`,
       JSON.stringify({ forecast: data }),
       'EX',
       3600);
@@ -81,6 +80,15 @@ router.get('/forecast/:city', catchAsync( async (req, res) => {
     // if we have cached - parse it back to object
     forecast = JSON.parse(forecast).forecast;
   }
+
+  return forecast;
+};
+
+exports.getForecast = getForecast;
+
+router.get('/forecast/:city', catchAsync( async (req, res) => {
+  // check if we have cached version
+  const forecast = await getForecast(req.params.city, req.query.days);
   res.status(200).send({
     status: 'OK',
     results: forecast,

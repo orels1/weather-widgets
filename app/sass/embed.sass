@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans:300,400,700,900&subset=cyrillic')
+
+.widget
+  border-radius: 4px
+  float: left
+  box-shadow: 0 10px 14px rgba(black, .1)
+  font-family: 'Fira Sans', sans-serif
+
+.widget__title
+  padding: 20px 20px 0 20px
+  line-height: 22px
+  margin: 0 0 12px 0
+  font-size: 24px
+  font-weight: 500
+
+.widget__forecast
+  display: flex
+  flex-direction: row
+  justify-content: center
+
+.forecast-day
+  margin: 0 15px 15px 15px
+  display: flex
+  flex-direction: column
+
+.forecast-day__image
+  width: 64px
+  height: 64px
+  align-self: center
+
+.forecast-info
+  flex: 1 1 auto
+
+.forecast-info__tempts
+  font-size: 12px
+  align-items: center
+  display: flex
+  flex-direction: column
+  padding: 0
+  margin: 0
+  list-style: none
+
+.forecast-info__item_night
+  font-size: 11px
+  color: rgba(black, .6)
+
+.forecast-info__dates
+  text-align: center
+  font-size: 12px
+  color: rgba(black, .8)
+  margin-top: 10px
+
+.widget_vertical
+
+  .widget__forecast
+    flex-direction: column
+
+  .forecast-day
+    flex-direction: row
+
+  .forecast-day__image
+    width: 40px
+    height: 40px
+
+  .forecast-info
+    align-self: center
+
+  .forecast-info__tempts
+    flex-direction: row
+    align-items: flex-end
+    justify-content: center
+
+  .forecast-info__item_night
+    margin-left: 10px
+
+  .forecast-info__dates
+    margin-top: 5px

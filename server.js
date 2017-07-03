@@ -10,13 +10,18 @@ app.use('/static', express.static(path.join(__dirname, 'static')));
 
 // Routes
 app.use('/api/weather', require('./api/weather').router);
+app.use('/embed', require('./api/embed').router);
 
 app.get('/', (req, res) => {
   res.status(200).send(pug.renderFile(path.join(__dirname, 'app/views', 'index.pug')));
 });
 
-app.listen(3000, () => {
+app.listen(process.env.WEATHER_PORT || 3000, () => {
   console.info('Running on port 3000');
+});
+
+app.use((req, res, next) => {
+  res.redirect('/');
 });
 
 app.use((err, req, res, next) => {
