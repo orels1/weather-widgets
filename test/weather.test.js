@@ -29,5 +29,13 @@ describe('Weather module', async () => {
       expect(data[0].tempts).to.have.property('night');
       expect(data[0].tempts).to.have.property('day');
     })
+  });
+
+  describe('Main module', async() => {
+    it('should get the finalized forecast data', async () => {
+      const forecast = await weather.getForecast('Moscow', 3);
+      expect(forecast).to.have.lengthOf(3);
+    })
   })
+
 });

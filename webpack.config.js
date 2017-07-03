@@ -5,10 +5,13 @@ const extractStyles = new ExtractTextPlugin({
   filename: './styles.css',
 });
 
+const extractEmbed = new ExtractTextPlugin({
+  filename: './embed.css',
+});
+
 module.exports = {
   entry: {
     bundle: './app/main.js',
-    styles: './app/sass/styles.sass'
   },
   output: {
     path: path.resolve(__dirname, 'static'),
@@ -17,9 +20,26 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.sass$/,
-        exclude: /node_modules/,
+        test: /\.sass$/, // compile our main styles
+        exclude: /node_modules|embed.sass/,
         use: extractStyles.extract({
+          use: [
+            {
+              loader: 'css-loader',
+            },
+            {
+              loader: 'postcss-loader'
+            },
+            {
+              loader: 'sass-loader'
+            }
+          ]
+        }),
+      },
+      {
+        test: /\.sass$/, // compile our embed styles
+        exclude: /node_modules|styles.sass/,
+        use: extractEmbed.extract({
           use: [
             {
               loader: 'css-loader',
@@ -44,5 +64,6 @@ module.exports = {
   },
   plugins: [
     extractStyles,
+    extractEmbed,
   ],
 };

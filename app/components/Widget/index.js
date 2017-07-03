@@ -10,7 +10,6 @@ class Widget extends React.Component {
     super(props);
     this.state = {
       type: '',
-      title: '',
       city: '',
       days: 1,
       forecast: [],
@@ -27,7 +26,6 @@ class Widget extends React.Component {
       .catch((err) => console.log(err));
   }
 
-  // TODO: refactor this :P
   componentWillReceiveProps(nextProps) {
     if (nextProps.city !== this.props.city
         || nextProps.days !== this.props.days) {
@@ -62,7 +60,7 @@ class Widget extends React.Component {
       </div>
     ));
     return (
-      <div className={`card widget d-flex flex-column ${this.state.type === 'vertical' && 'widget-vertical'}`}>
+      <div className={`card widget d-flex flex-column ${this.state.type === 'vertical' && 'widget-vertical'} ${this.props.className}`}>
         <div className="card-block">
           <h4 className="card-title">{this.state.city}</h4>
         </div>
@@ -76,16 +74,16 @@ class Widget extends React.Component {
 
 Widget.propTypes = {
   type: PropTypes.string,
-  title: PropTypes.string,
   city: PropTypes.string,
   days: PropTypes.number,
+  className: PropTypes.string,
 };
 
 Widget.defaultProps = {
   type: 'horizontal',
-  title: 'Example widget',
   city: 'Moscow',
   days: 1,
+  className: '',
 };
 
 export default Widget;

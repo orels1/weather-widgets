@@ -3,6 +3,10 @@
 @import url('https://fonts.googleapis.com/css?family=Fira+Sans:300,400,700,900&subset=cyrillic')
 
 $gray: #f4f6f9
+$blue: #1044d3
+
+$medium: 840px
+$small: 575px
 
 *
   font-family: 'Fira Sans', sans-serif
@@ -64,8 +68,6 @@ html, body, #app, .wrapper
     &:after
       opacity: 1
 
-.widgets-list
-
 .card
   margin: 0 15px 15px 15px
   max-width: 200px
@@ -91,6 +93,24 @@ html, body, #app, .wrapper
 .Select-value
   color: black
 
+.widget-constructor
+
+  .row
+    @media (max-width: $small)
+      flex-direction: column !important
+
+    .col
+      @media (max-width: $small)
+        min-height: auto
+
+    .col-5
+      @media (max-width: $small)
+        max-width: 100%
+
+  .widget
+    @media (max-width: $medium)
+      transform: scale(1, 1)
+
 .widget-constructor-card
   max-width: 100%
 
@@ -98,6 +118,18 @@ html, body, #app, .wrapper
     flex: 1
     display: flex
     font-family: 'Fira Sans', sans-serif
+
+    &.row
+      @media (max-width: $medium)
+        flex-direction: column !important
+
+      .col
+        @media (max-width: $medium)
+          min-height: auto
+
+      label
+        @media (max-width: $medium)
+          min-height: auto
 
     input::placeholder
       color: rgba(black, .2)
@@ -129,7 +161,20 @@ html, body, #app, .wrapper
     box-shadow: 0 4px 14px rgba(#0275d8, .3)
 
 
+.big-widget
+  @media (max-width: $small)
+    display: none !important
+
+.small-widget
+  display: none !important
+  @media (max-width: $small)
+    display: flex !important
+
 .widget
+  @media (max-width: $medium)
+    transform: scale(0.7, 0.7)
+  @media (max-width: $small)
+    transform: scale(1, 1)
 
   .card
     box-shadow: none
@@ -198,3 +243,81 @@ html, body, #app, .wrapper
   height: 64px
   width: 64px
   align-self: center
+
+pre
+  border-radius: 4px
+  margin-top: 5px
+  background: $gray
+  padding: 20px
+  font-size: 10px
+  white-space: pre-wrap
+
+.promo-header
+  background: $blue
+
+  h1
+    color: #fff
+    margin: 60px 0 40px 0
+
+  .widget
+    margin: 0 0 40px 0
+
+
+.promo-header h1
+  padding: 20px
+  @media (max-width: 1208px)
+    font-size: 40px
+  @media (max-width: $medium)
+    font-size: 35px
+  @media (max-width: $small)
+    font-size: 30px
+
+
+.promo-create-link
+  text-decoration: none
+  margin: 0 0 60px 0
+
+.btn-promo
+  border: 2px solid white
+  color: #fff
+  font-family: 'Fira Sans', sans-serif
+  font-size: 24px
+  font-weight: 500
+  background: $blue
+  transition: all 150ms ease
+  padding: 0 20px
+  line-height: 45px
+  cursor: pointer
+
+  &:hover
+    color: $blue
+    background: white
+
+.features-list
+
+  h3
+    font-weight: 900
+
+.features-row
+  @media (max-width: $small)
+    flex-direction: column !important
+
+.feature-img
+  width: 100px
+  height: 100px
+  margin: 0 0 20px 0
+
+.feature-item
+  @media (max-width: $small)
+    margin: 0 0 40px 0
+
+  h5
+    font-weight: 500
+    text-align: center
+
+.footer
+  color: #000
+
+  a
+    color: #000
+    text-decoration: none

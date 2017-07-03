@@ -1,8 +1,10 @@
 import React from 'react';
 import 'whatwg-fetch'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import WidgetsList from './components/WidgetsList';
 import WidgetConstructor from './components/WidgetConstructor';
+import PromoHeader from './components/PromoHeader';
+import FeaturesList from './components/FeaturesList';
+import Footer from './components/Footer';
 
 class Routes extends React.Component {
   constructor(props) {
@@ -13,13 +15,13 @@ class Routes extends React.Component {
   render() {
     return (
       <Router>
-        <div className="w-100 row wrapper">
-          <div className="col sidebar padding-30">
-          </div>
-          <div className="col main padding-30">
-            <Route exact path="/" component={WidgetsList} />
-            <Route exact path="/create" component={WidgetConstructor} />
-          </div>
+        <div className="w-100 wrapper">
+            <PromoHeader/>
+            <div className="main padding-30">
+              <Route exact path="/" component={FeaturesList} />
+              <Route exact path="/create" component={WidgetConstructor} />
+            </div>
+            <Footer />
         </div>
       </Router>
     )
