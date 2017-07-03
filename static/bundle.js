@@ -45297,7 +45297,7 @@ var Footer = function Footer(props) {
     ),
     _react2.default.createElement(
       "a",
-      { href: "https://github.com/orels1/test-weather" },
+      { href: "https://github.com/orels1/weather-widgets" },
       _react2.default.createElement("img", { src: "/static/img/gh.png" })
     )
   );

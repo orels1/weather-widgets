@@ -17,6 +17,7 @@ app.get('/', (req, res) => {
 });
 
 app.listen(process.env.WEATHER_PORT || 3000, () => {
+  console.log(process.env.WEATHER_PORT);
   console.info('Running on port 3000');
 });
 
